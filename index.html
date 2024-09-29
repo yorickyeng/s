@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ звука в процессах распознавания речи</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/kiss.jpg" type="image/jpg"
+</head>
+<body>
+    <div class="container">
+        <h1>Пример распознавания аудио в текст</h1>
+        <button id="start-btn">Начать запись</button>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const output = document.getElementById('output');
+
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'ru-RU';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = function() {
+                startBtn.textContent = 'Запись...';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                output.textContent = transcript;
+            };
+
+            recognition.onerror = function(event) {
+                output.textContent = 'Ошибка распознавания: ' + event.error;
+            };
+
+            recognition.onend = function() {
+                startBtn.textContent = 'Начать запись';
+            };
+
+            startBtn.addEventListener('click', () => {
+                recognition.start();
+            });
+        } else {
+            output.textContent = 'Ваш браузер не поддерживает распознавание речи.';
+        }
+    </script>
+
+    <!--<script src="script.js"></script>-->
+    <!--script src="tatar.js"></script>-->
+
+</body>
+</html>

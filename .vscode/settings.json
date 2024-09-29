@@ -1,0 +1,5 @@
+{
+    "accessibility.verbosity.keybindingsEditor": true,
+    "workbench.settings.openDefaultKeybindings": true,
+    "git.ignoreLimitWarning": true
+}
