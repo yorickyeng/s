@@ -10,16 +10,6 @@ body {
     background: linear-gradient(to right, #6a11cb, #2575fc);
 }
 
-.lotsoftext {
-    text-align: left;
-    padding: 40px;
-    background: white;
-    border-radius: 0px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
-}
-
 .container {
     text-align: center;
     padding: 40px;
@@ -28,6 +18,17 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 100%;
+}
+
+.container-clock {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    margin-right: 20px;
 }
 
 h1 {

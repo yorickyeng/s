@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анализ звука в процессах распознавания речи</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="images/kiss.jpg" type="image/jpg"
+    <link rel="icon" href="images/kiss.jpg" type="image/jpg">
 </head>
 <body>
+    <div class="container-clock">
+        <h1>Электронные часы</h1> 
+        <div id="clock"></div>
+    </div>
+
     <div class="container">
         <h1>Пример распознавания аудио в текст</h1>
         <button id="start-btn">Начать запись</button>
@@ -15,6 +20,14 @@
     </div>
 
     <script>
+        function displayTime() {
+            let element = document.getElementById("clock");
+            let now = new Date();    // Получить текущее время
+            element.innerHTML = now.toLocaleTimeString(); // Отобразить время
+            setTimeout(displayTime, 1000);    // Вызывать функцию каждую секунду
+        }
+        window.onload = displayTime;
+        
         const startBtn = document.getElementById('start-btn');
         const output = document.getElementById('output');
 
@@ -30,7 +43,26 @@
 
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
-                output.textContent = transcript;
+                
+                // Применяем простую логику для добавления знаков
+                let modifiedTranscript = transcript;
+                
+                // Примеры вопросов и восклицаний
+                const questionWords = ["что", "где", "кто", "как", "почему"];
+                const exclamationWords = ["ура", "давай", "отлично", "вперед"];
+                
+                // Проверка на вопрос
+                const lowerCaseTranscript = transcript.toLowerCase();
+                if (questionWords.some(word => lowerCaseTranscript.includes(word))) {
+                    modifiedTranscript += '?';
+                }
+                
+                // Проверка на восклицание
+                if (exclamationWords.some(word => lowerCaseTranscript.includes(word))) {
+                    modifiedTranscript += '!';
+                }
+
+                output.textContent = modifiedTranscript;
             };
 
             recognition.onerror = function(event) {
@@ -48,9 +80,6 @@
             output.textContent = 'Ваш браузер не поддерживает распознавание речи.';
         }
     </script>
-
-    <!--<script src="script.js"></script>-->
-    <!--script src="tatar.js"></script>-->
 
 </body>
 </html>

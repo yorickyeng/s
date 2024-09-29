@@ -1,3 +1,11 @@
+function displayTime() {
+    let element = document.getElementById("clock");
+    let now = new Date();    // Получить текущее время
+    element.innerHTML = now.toLocaleTimeString(); // Отобразить время
+    setTimeout(displayTime, 1000);    // Вызывать функцию каждую секунду
+}
+window.onload = displayTime;
+
 const startBtn = document.getElementById('start-btn');
 const output = document.getElementById('output');
 
